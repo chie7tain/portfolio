@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial=scale=1">
     <title>Chie7tain</title>
+<script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
     <!-- styles -->
     <link rel="stylesheet" href="styles.css">
     <!-- responsive styles -->
@@ -27,14 +28,21 @@
     <!-- <section class="container"> -->
       <!-- navbar -->
       <nav class="nav-container" id="navbar">
-        <div class="logo-container">
-          <h2 id="logo">Chie7tain</h2>
+        <div class="navbar-center">
+          <div class="logo-container">
+            <a id="logo" href="index.html" class="logo-link">Chie7tain</a>
+          </div>
+          <ul class="navigation">
+            <li class="nav-link"><a href="#welcome-section">About</a></li>
+            <li class="nav-link"><a href="#projects">Work</a></li>
+            <li class="nav-link"><a href="#contact-section">Contact</a></li>
+          </ul>
+          <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+          </div>
         </div>
-        <ul class="navigation">
-          <li class="nav-link"><a href="#welcome-section">About</a></li>
-          <li class="nav-link"><a href="#projects">Work</a></li>
-          <li class="nav-link"><a href="#contact-section">Contact</a></li>
-        </ul>
       </nav>
       <!-- end of navbar -->
       <!-- ================= -->
@@ -59,8 +67,8 @@
         </div>
         <div id="project-grid">
           <div class="project-tile">
-            <a href="#">
-              <img class="project-image" src="./assets/image/image-of-hotel-landing-page.png" alt="image of a project" class="project-image">
+            <a href="https://hotelesty-chie7tain.netlify.app/" target="_blank">
+              <img class="project-image" src="./assets/images/image-of-hotel-landing-page.png" alt="image of a project" class="project-image">
               <div class="project-title-container">
                 <p class="project-title">
                   <span class="code"><</span>
@@ -72,8 +80,8 @@
             </a>
           </div>
           <div class="project-tile">
-            <a href="#">
-              <img class="project-image" src="./assets/image/image-of-academy-search-page.png" alt="image of a project" class="project-image">
+            <a href="http://searchpage-envato.netlify.app/" target="_blank">
+              <img class="project-image" src="./assets/images/image-of-academy-search-page.png" alt="image of a project" class="project-image">
               <div class="project-title-container">
                 <p class="project-title">
                   <span class="code"><</span>
@@ -95,16 +103,34 @@
       <!-- ======================== -->
       <!-- contact section -->
       <section id="contact-section">
-        <h2 class="contact-section-header">
-          Let's work together
-        </h2>
-        <p class="contact-text">How do you take your coffee?</p>
+        <div class="heading-container">
+            <h2 class="contact-section-header">
+              Let's work together
+            </h2>
+            <p class="contact-text">
+              <em>
+              How do you take your coffee?
+            </em>
+            </p>
+        </div>
         <div class="social-icon-container">
-          <i class="social-icons">Facebook</i>
-          <i class="social-icons" id="profile-link">Github</i>
-          <i class="social-icons">Twitter</i>
-          <i class="social-icons">Send a mail</i>
-          <i class="social-icons">Call me</i>
+          <a href="#" class="social-links">
+            <i class="fa fa-facebook-square social-icons" aria-hidden="true"><span class="icon-text">Facebook</span>
+            </i>
+          </a>
+          <a id="profile-link" href="https://github.com/chie7tain" class="social-links" target="_blank">
+            <i class="fa fa-github social-icons" aria-hidden="true" ><span class="icon-text">Github</span>
+            </i>
+          </a>
+          <a href="https://twitter.com/ol7mpian" class="social-links" target="_blank">
+              <i class="fa fa-twitter social-icons" aria-hidden="true"><span class="icon-text">Twitter</span></i>
+          </a>
+          <a href="mailto:fredrickokwuobi@gmail.com" class="social-links" target="_blank">
+              <i class="fa fa-at social-icons" aria-hidden="true"><span class="icon-text">Send a mail</span></i>
+          </a>
+          <a href="tel:+2348034829625" class="social-links">
+              <i class="fa fa-mobile social-icons" aria-hidden="true"><span class="icon-text">Call me</span></i>
+          </a>
         </div>
       </section>
       <!-- end of contact section -->
@@ -121,5 +147,6 @@
     <!-- ===================== -->
 
     <script src="app.js"></script>
+    <!-- <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script> -->
   </body>
 </html>
