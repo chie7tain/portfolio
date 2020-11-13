@@ -32,7 +32,7 @@
   display: inline-block;
   margin:10px;
   font-size:1.3rem;
-  padding:1rem;
+  padding:.5em;
   transition:var(--mainTransition);
   border-radius:5px;
 }
