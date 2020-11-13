@@ -71,9 +71,9 @@
   transition: var(--mainTransition);
 }
 .line1,.line2,.line3{
-  width:40px;
+  width:35px;
   background:var(--mainGrey);
-  height:7px;
+  height:5px;
   margin:2.5px;
   transition: var(--mainTransition);
 }
