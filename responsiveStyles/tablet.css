@@ -24,7 +24,7 @@
 }
 #logo{
   color:var(--mainBlack);
-  letter-spacing: var(--mainSpacing);
+  letter-spacing: var(--mainDarkBlue);
   font-size: 1.7rem;
   cursor: pointer;
   text-decoration:none;

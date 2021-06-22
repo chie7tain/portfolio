@@ -21,7 +21,7 @@
   align-items: center;
 }
 #logo{
-  color:var(--mainBlack);
+  color:var(--mainDarkBlue);
   letter-spacing: var(--mainSpacing);
   font-size: 1.7rem;
   cursor: pointer;
@@ -106,10 +106,6 @@
     text-decoration: none;
     color:var(--mainWhite);
 }
-/* .project-image{
-  width:100%;
-  height:400px;
-} */
 
 .project-title{
   padding:1em;
