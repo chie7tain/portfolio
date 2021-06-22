@@ -1,34 +1,34 @@
 /* default browser resets */
-*{
-  margin:0px;
-  padding:0px;
+* {
+  margin: 0px;
+  padding: 0px;
   box-sizing: border-box;
 }
 /* main styles and colors*/
-:root{
-  --mainBlack:#1e1f26;
-  --mainRed:#be3144;
-  --mainWhite:#f0f0f0;
-  --mainGrey:#c2c0c0;
-  --mainBlue:#45567d;
-  --mainDarkBlue:#1a2b53;
-  --mainYellow:rgb(238, 126, 22);
-  --mainSpacing:.1rem;
-  --mainTransition:all 0.5s linear;
+:root {
+  --mainBlack: #1e1f26;
+  --mainRed: #be3144;
+  --mainWhite: #f0f0f0;
+  --mainGrey: #c2c0c0;
+  --mainBlue: #45567d;
+  --mainDarkBlue: #1a2b53;
+  --mainYellow: rgb(238, 126, 22);
+  --mainSpacing: 0.1rem;
+  --mainTransition: all 0.5s linear;
 }
-html{
+html {
   scroll-behavior: smooth;
   scroll-margin-top: 10px;
 }
-body{
-  background:var(--mainBlack);
-  font-family: 'Raleway', sans-serif;
+body {
+  background: var(--mainBlack);
+  font-family: "Raleway", sans-serif;
 }
-.container{
-  width:1366px;
-  margin:0 auto;
+.container {
+  width: 1366px;
+  margin: 0 auto;
 }
-.project-image{
-  width:100%;
+.project-image {
+  width: 100%;
   height:400px;
 }

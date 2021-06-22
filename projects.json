@@ -1,0 +1,33 @@
+[
+	{
+		"projectTitle":"Mail Searcher",
+    	"projectLink": "https://email-archive-inspector.netlify.app",
+    	"projectImg":"./assets/images/mail-searcher.png"
+	},
+	{
+		"projectTitle":"Random User Dashboard",
+    	"projectLink": "https://irishcream.netlify.app",
+    	"projectImg":"./assets/images/random-user-dashboard.png"
+	},
+	{
+		"projectTitle":"Landing Page for Loan App",
+    	"projectLink": "https://landingloan.netlify.app/",
+    	"projectImg":"./assets/images/landingLoan-pic2.png"
+	},
+		{
+		"projectTitle":"Hotel Esty",
+    	"projectLink": "https://hotelesty-chie7tain.netlify.app/",
+    	"projectImg":"./assets/images/image-of-hotel-landing-page.png"
+	},
+		{
+		"projectTitle":"Js Technical Docs",
+    	"projectLink": "https://technicaldocpagejs.netlify.app/",
+    	"projectImg":"./assets/images/technicalDocjs.png"
+	},
+		{
+		"projectTitle":"Envato Page",
+    	"projectLink": "http://searchpage-envato.netlify.app/",
+    	"projectImg":"./assets/images/image-of-academy-search-page.png"
+	}
+
+]
