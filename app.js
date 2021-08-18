@@ -42,7 +42,7 @@ async function getProjects(url) {
   try {
     let response = await fetch(url);
     let projects = await response.json();
-    console.log(projects);
+
 
     let projectDetails = projects.map(project =>{
       let { projectTitle, projectLink,projectImg} = project;
@@ -60,8 +60,10 @@ const displayProjects = (arr)=>{
     projectString +=
      `
            <div class="project-tile">
-            <a href="${project.projectLink}" target="_blank">
-              <img class="project-image" src="${project.projectImg}" alt="image of a project" class="project-image">
+            <a class="grid-item" href="${project.projectLink}" target="_blank">
+            <div class="project-image-container">
+              <img class="project-image" src="${project.projectImg}" alt="image of a ${project.projectTitle}" class="project-image">
+             </div> 
               <div class="project-title-container">
                 <p class="project-title">
                   <span class="code"><</span>

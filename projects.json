@@ -10,9 +10,9 @@
     	"projectImg":"./assets/images/random-user-dashboard.png"
 	},
 	{
-		"projectTitle":"Landing Page for Loan App",
+		"projectTitle":"Landing Page",
     	"projectLink": "https://landingloan.netlify.app/",
-    	"projectImg":"./assets/images/landingLoan-pic2.png"
+    	"projectImg":"./assets/images/landing-page-for-loan-app.png"
 	},
 		{
 		"projectTitle":"Hotel Esty",
@@ -22,12 +22,18 @@
 		{
 		"projectTitle":"Js Technical Docs",
     	"projectLink": "https://technicaldocpagejs.netlify.app/",
-    	"projectImg":"./assets/images/technicalDocjs.png"
+    	"projectImg":"./assets/images/technicaldocumentation-for-js.png"
+	},
+
+		{
+		"projectTitle":"Snapshot",
+    	"projectLink": "http://snapshot-zuri.netlify.app/",
+    	"projectImg":"./assets/images/snapshot.png"
 	},
 		{
-		"projectTitle":"Envato Page",
-    	"projectLink": "http://searchpage-envato.netlify.app/",
-    	"projectImg":"./assets/images/image-of-academy-search-page.png"
+		"projectTitle":"Error Page",
+    	"projectLink": "https://error505.netlify.app/",
+    	"projectImg":"./assets/images/errorpage.png"
 	}
 
 ]

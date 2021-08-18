@@ -1,7 +1,5 @@
-@media only screen and (min-width:401px) and (max-width:960px){
-/* body{ */
-  /* overflow: hidden; */
-/* } */
+@media only screen and (max-width:960px){
+
 /* styles for nav-bar */
 #navbar{
   position:-webkit-sticky;
@@ -53,7 +51,7 @@
   top:60px;
   background:var(--mainDarkBlue);
   width:100%;
-  height: 100vh;
+  height: 50vh;
   display: flex;
   flex-direction:column;
   justify-content: space-around;
@@ -111,192 +109,7 @@
 /* ============================== */
 /* end of nav bar */
 /* ================== */
-/* welcome section */
-#welcome-section{
-  width:100%;
-  height:100vh;
-  display:flex;
-  flex-direction: column;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-}
-
-.welcome-header{
-  color:var(--mainWhite);
-  font-size: 3rem;
-}
-.welcome-text{
-  color:var(--mainRed);
-  font-size: 1.4rem;
-}
-/* end of welcome section */
-/* =======================*/
-/* styles for projects */
-#projects{
-  background:var(--mainBlue);
-}
-.header-container{
-  width:100%;
-  text-align:center;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height: 200px;
-}
-.project-section-header{
-  color:var(--mainWhite);
-  width:90%;
-  font-size:2rem;
-}
-.ruler{
-  background:var(--mainWhite);
-  width:100%;
-}
-#project-grid{
-  width:100%;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  grid-gap: 4rem;
-  max-width:1280px;
-  margin:0 auto;
-}
-.project-tile{
-  width:100%;
-}
-.project-tile a{
-    text-decoration: none;
-    color:var(--mainWhite);
-}
-.project-image{
-  width:100%;
-}
-
-.project-title{
-  padding:1rem;
-  background:var(--mainBlack);
-  width:100%;
-  font-weight:400;
-  margin-top: -9px;
-  text-align: center;
-  color:var(--mainWhite);
-  transition:var(--mainTransition);
-  font-family: 'Poppins', sans-serif;
-  font-size:1em;
-}
-.code{
-  font-size: inherit;
-  font-family: 'Fira Mono', monospace;
-  font-weight: 550;
-  color:var(--mainBlack);
-  transition:color 0.6s ease-in;
-}
-.project-title:hover .code{
-  display: inline;
-  color: var(--mainYellow);
-}
-
-.show-all-btn-container{
-  width:100%;
-  height:150px;
-  display:flex;
-  justify-content: center;
-  align-items:center;
-}
-#show-all-btn{
-  padding:.5rem 1rem;
-  background:var(--mainBlack);
-  color:var(--mainWhite);
-  letter-spacing: var(--mainSpacing);
-  text-transform:capitalize;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-indent: 10px;
-  border:none;
-  transition:var(--mainTransition);
-  font-weight: 600;
-  font-size:1rem;
-  font-family: 'Poppins', sans-serif;
-  border-radius:5px;
-}
-#show-all-btn:hover{
-  background:var(--mainWhite);
-  color:var(--mainBlack);
-  border:1px solid var(--mainBlack);
-}
-#show-all-btn .code{
-  color:var(--mainYellow);
-}
-/* end of styles for projects */
-/* =-======================== */
-/* styles for contact section */
- #contact-section{
-   width:100%;
-   height: 90vh;
-   padding:1rem;
-   display: flex;
-   justify-content: center;
-   flex-direction: column;
-   align-items: center;
-   background:var(--mainDarkBlue);
- }
- .heading-container{
-   margin:15px;
-   width:100%;
-   text-align:center;
- }
- .contact-section-header{
-   font-size:2.3rem;
-   color:var(--mainWhite);
-   margin:5px;
- }
- .contact-text{
-  color:var(--mainGrey);
-  font-size:1rem;
- }
- .social-icon-container{
-   display:flex;
-   width:100%;
-   flex-wrap: wrap;
-   align-items:center;
-   justify-content:center;
-   height:20vh;
- }
- .social-links{
-   margin:10px;
-   transition:var(--mainTransition);
- }
- .social-links:hover{
-  transform: translateY(40%);
- }
- .social-icons{
-   color:var(--mainWhite);
-   font-size:1.1rem;
- }
- .icon-text{
-   margin-left:5px;
- }
-/* end of styles for contact section */
-/* =========================== */
-/* styles for footer section */
-.footer{
-  height:10vh;
-  display:flex;
-  padding:1rem;
-  justify-content: center;
-  align-items:center;
-}
-.footer-text{
-  color:var(--mainWhite);
-  letter-spacing: var(--mainSpacing);
-  font-size: 1rem;
-  text-align: center;
-}
-.creator{
-  color:var(--mainRed);
-}
-/* end of styles for footer section */
-/* ========================= */
+  #welcome-section {
+    height: 50vh;
+  }
 }
