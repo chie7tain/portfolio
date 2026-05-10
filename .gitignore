@@ -1,2 +1,5 @@
 utils.html
 holder.js
+node_modules/
+.playwright-mcp
+.DS_Store
