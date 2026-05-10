@@ -67,7 +67,7 @@ export default function ArticlesAdminPage() {
         title: form.title,
         body: form.body,
         published: form.published,
-        ...(form.publishedAt ? { publishedAt: new Date(form.publishedAt).toISOString() } : {}),
+        publishedAt: form.publishedAt ? new Date(form.publishedAt).toISOString() : null,
       }
       if (editing) {
         await updateArticle(editing.id, body)
