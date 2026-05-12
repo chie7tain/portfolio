@@ -2,64 +2,36 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Overview
+See `../CLAUDE.md` (workspace root) for full architecture, commands, domain language, and environment setup covering both this frontend and the `portfolio-api/` backend.
 
-A vanilla HTML/CSS/JavaScript personal portfolio site. No build system, no package manager, no framework — just static files served directly from the filesystem or a static host.
+## This project: React frontend
 
-## Running the site
+React 18 + Vite + Tailwind CSS 4 + React Router 6. Deployed to Vercel (`.vercel/project.json`).
 
-Open `index.html` in a browser, or serve it with any static file server. For local development:
+### Commands
 
 ```bash
-npx serve .
-# or
-python3 -m http.server 8080
+yarn dev          # dev server at http://localhost:5173
+yarn build        # tsc + vite build
+yarn test         # vitest run (single pass)
+yarn test:watch   # vitest watch
 ```
 
-## Architecture
+### Key files
 
-- **`index.html`** — single-page layout with four sections: navbar, welcome/hero, projects grid, contact/footer.
-- **`app.js`** — all JavaScript. Two responsibilities:
-  1. Mobile nav toggle (burger menu with CSS class toggling and link-fade animation).
-  2. Fetches `projects.json` on `DOMContentLoaded`, maps entries to `{projectImg, projectLink, projectTitle}`, and renders them into `#project-grid` as HTML strings.
-- **`projects.json`** — source of truth for the projects grid. Each entry needs `projectTitle`, `projectLink`, and `projectImg` (relative path under `assets/images/`).
-- **`styles.css`** — base styles and CSS custom properties (color palette, spacing, transitions). Variables defined on `:root` are the design tokens for the whole site.
-- **`responsiveStyles/`** — three breakpoint files (`desktop.css`, `tablet.css`, `mobilie.css`) layered on top of `styles.css`. Note the intentional typo in `mobilie.css`.
-- **`assets/images/`** — project screenshot images referenced from `projects.json`.
+- **`src/App.tsx`** — router root with public/admin shell split
+- **`src/api/index.ts`** — all fetch calls; handles 401 redirect to `/admin/login`
+- **`src/components/admin/RouteGuard.tsx`** — checks `sessionStorage` for API key
+- **`@shared`** alias → `./shared/` (types shared with backend)
+- **`tests/handlers.ts`** — MSW mock handlers and fixture data used across all tests
 
-## Adding a project
-
-1. Add a screenshot to `assets/images/`.
-2. Append an entry to `projects.json`:
-   ```json
-   {
-     "projectTitle": "Project Name",
-     "projectLink": "https://...",
-     "projectImg": "./assets/images/filename.png"
-   }
-   ```
-
-## Agent skills
-
-### Issue tracker
-
-Issues live in GitHub Issues (`github.com/chie7tain/portfolio`). See `docs/agents/issue-tracker.md`.
-
-### Triage labels
-
-Default label vocabulary (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`). See `docs/agents/triage-labels.md`.
-
-### Domain docs
-
-Multi-context layout — `CONTEXT-MAP.md` at root pointing to `frontend/CONTEXT.md` and `backend/CONTEXT.md`. See `docs/agents/domain.md`.
-
-## Design tokens (CSS variables in `styles.css`)
+### Design tokens (CSS variables in `src/index.css`)
 
 | Variable | Value |
 |---|---|
-| `--mainBlack` | `#1e1f26` |
-| `--mainRed` | `#be3144` |
-| `--mainWhite` | `#f0f0f0` |
-| `--mainBlue` | `#45567d` |
-| `--mainDarkBlue` | `#1a2b53` |
-| `--mainYellow` | `rgb(238, 126, 22)` |
+| `--main-black` | `#1e1f26` |
+| `--main-red` | `#be3144` |
+| `--main-white` | `#f0f0f0` |
+| `--main-blue` | `#45567d` |
+| `--main-dark-blue` | `#1a2b53` |
+| `--main-yellow` | `rgb(238, 126, 22)` |
