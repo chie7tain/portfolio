@@ -115,7 +115,7 @@ export default function HomePage() {
           <p className="text-main-white/70 leading-relaxed">
             I'm a full-stack engineer focused on backend systems, APIs, and
             developer tooling. I've shipped production software across fintech,
-            SaaS, and media — from database schema design to real-time event
+            SaaS, and media from database schema design to real-time event
             pipelines. I care about clean architecture and code that doesn't
             need a legend to read.
           </p>
