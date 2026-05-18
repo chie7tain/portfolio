@@ -1,6 +1,7 @@
 import type { Project, Article, MediaItem } from '@shared/types'
 
 const BASE_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:3000'
+console.log({BASE_URL})
 const SESSION_KEY = 'apiKey'
 
 function authHeaders(): HeadersInit {
@@ -35,6 +36,15 @@ export async function fetchMedia(): Promise<MediaItem[]> {
   const res = await fetch(`${BASE_URL}/media`)
   if (!res.ok) throw new Error('Failed to fetch media')
   return res.json()
+}
+
+export async function submitContact(body: { name: string; email: string; message: string }): Promise<void> {
+  const res = await fetch(`${BASE_URL}/contact`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  })
+  if (!res.ok) throw new Error('Failed to send message')
 }
 
 // Used by LoginPage to validate a key without triggering a hard redirect on 401

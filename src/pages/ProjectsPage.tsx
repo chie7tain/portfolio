@@ -1,14 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
 import { fetchProjects } from '../api'
-import type { Project } from '@shared/types'
 import ProjectCard from '../components/ProjectCard'
+import ProjectCardSkeleton from '../components/ProjectCardSkeleton'
 
 export default function ProjectsPage() {
-  const [projects, setProjects] = useState<Project[] | null>(null)
-
-  useEffect(() => {
-    fetchProjects().then(setProjects).catch(() => setProjects([]))
-  }, [])
+  const { data: projects, isLoading } = useQuery({
+    queryKey: ['projects'],
+    queryFn: fetchProjects,
+  })
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-16">
@@ -18,11 +17,13 @@ export default function ProjectsPage() {
         Production software, open-source tools, and side experiments.
       </p>
       <div className="w-12 h-1 bg-main-red mb-10" />
-      {projects !== null && projects.length === 0 && (
+      {!isLoading && projects?.length === 0 && (
         <p className="text-main-white/60">No projects yet.</p>
       )}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {(projects ?? []).map((p) => <ProjectCard key={p.id} project={p} />)}
+        {isLoading
+          ? Array.from({ length: 3 }).map((_, i) => <ProjectCardSkeleton key={i} />)
+          : projects?.map((p) => <ProjectCard key={p.id} project={p} />)}
       </div>
     </div>
   )

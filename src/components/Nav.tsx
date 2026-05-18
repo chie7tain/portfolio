@@ -5,6 +5,7 @@ const links = [
   { label: 'Projects', to: '/projects' },
   { label: 'Articles', to: '/articles' },
   { label: 'Media', to: '/media' },
+  { label: 'Contact', to: '/contact' },
 ]
 
 export default function Nav() {

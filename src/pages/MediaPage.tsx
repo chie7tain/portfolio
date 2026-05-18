@@ -1,14 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
 import { fetchMedia } from '../api'
-import type { MediaItem } from '@shared/types'
 import MediaCard from '../components/MediaCard'
+import MediaCardSkeleton from '../components/MediaCardSkeleton'
 
 export default function MediaPage() {
-  const [media, setMedia] = useState<MediaItem[] | null>(null)
-
-  useEffect(() => {
-    fetchMedia().then(setMedia).catch(() => setMedia([]))
-  }, [])
+  const { data: media, isLoading } = useQuery({
+    queryKey: ['media'],
+    queryFn: fetchMedia,
+  })
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-16">
@@ -18,11 +17,13 @@ export default function MediaPage() {
         Podcasts, conference talks, and videos where I've shared ideas publicly.
       </p>
       <div className="w-12 h-1 bg-main-red mb-10" />
-      {media !== null && media.length === 0 && (
+      {!isLoading && media?.length === 0 && (
         <p className="text-main-white/60">No media yet.</p>
       )}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {(media ?? []).map((m) => <MediaCard key={m.id} item={m} />)}
+        {isLoading
+          ? Array.from({ length: 3 }).map((_, i) => <MediaCardSkeleton key={i} />)
+          : media?.map((m) => <MediaCard key={m.id} item={m} />)}
       </div>
     </div>
   )

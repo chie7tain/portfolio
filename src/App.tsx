@@ -6,6 +6,7 @@ import ProjectsPage from './pages/ProjectsPage'
 import ArticlesPage from './pages/ArticlesPage'
 import ArticlePage from './pages/ArticlePage'
 import MediaPage from './pages/MediaPage'
+import ContactPage from './pages/ContactPage'
 import RouteGuard from './components/admin/RouteGuard'
 import AdminLayout from './components/admin/AdminLayout'
 import LoginPage from './pages/admin/LoginPage'
@@ -27,6 +28,7 @@ function AppShell() {
           <Route path="/articles" element={<ArticlesPage />} />
           <Route path="/articles/:id" element={<ArticlePage />} />
           <Route path="/media" element={<MediaPage />} />
+          <Route path="/contact" element={<ContactPage />} />
 
           <Route path="/admin/login" element={<LoginPage />} />
 

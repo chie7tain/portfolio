@@ -32,9 +32,22 @@ _Avoid_: Protected route, private route
 The component that checks `sessionStorage` for a valid API key before rendering an Admin Route. Redirects to `/admin/login` if no key is found.
 _Avoid_: Auth wrapper, private route wrapper
 
+**Contact Page**:
+The public page at `/contact` where a site visitor can send a message to the Admin. Distinct from Admin Routes — no authentication required.
+_Avoid_: Contact form page, reach out page
+
+**Contact Message**:
+A message submitted by a site visitor via the Contact Page — has a sender name, sender email, and body text. Delivered to the Admin by email via Resend.
+_Avoid_: Inquiry, submission, lead
+
+**Loading Skeleton**:
+A placeholder UI shown in a Content Feed while data is being fetched — mirrors the shape of the real cards using `animate-pulse`. Replaced by real cards once the fetch resolves.
+_Avoid_: Spinner, loader, placeholder
+
 ## Relationships
 
 - The frontend consumes **Projects**, **Articles**, and **Media Items** from the backend API — it never writes content on the public-facing side
 - A **Published** content item is the only kind returned by the public API and displayed in a **Content Feed**
 - The **Admin UI** reads from backend Admin Endpoints (which return all content including drafts) and writes via the existing POST/PATCH/DELETE endpoints
 - The **Admin UI** authenticates by sending the API key as `x-api-key` on every write request and Admin Endpoint request
+- A **Contact Message** is submitted by any visitor — no authentication required — and delivered to the Admin via Resend
