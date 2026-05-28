@@ -4,7 +4,7 @@ import MediaCard from '../components/MediaCard'
 import MediaCardSkeleton from '../components/MediaCardSkeleton'
 
 export default function MediaPage() {
-  const { data: media, isLoading } = useQuery({
+  const { data: media, isLoading, isError } = useQuery({
     queryKey: ['media'],
     queryFn: fetchMedia,
   })
@@ -17,7 +17,10 @@ export default function MediaPage() {
         Podcasts, conference talks, and videos where I've shared ideas publicly.
       </p>
       <div className="w-12 h-1 bg-main-red mb-10" />
-      {!isLoading && media?.length === 0 && (
+      {isError && (
+        <p className="text-red-400 text-sm mb-6">Failed to load media.</p>
+      )}
+      {!isLoading && !isError && media?.length === 0 && (
         <p className="text-main-white/60">No media yet.</p>
       )}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

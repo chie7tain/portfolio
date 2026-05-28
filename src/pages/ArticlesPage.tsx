@@ -4,7 +4,7 @@ import ArticleCard from '../components/ArticleCard'
 import ArticleCardSkeleton from '../components/ArticleCardSkeleton'
 
 export default function ArticlesPage() {
-  const { data: articles, isLoading } = useQuery({
+  const { data: articles, isLoading, isError } = useQuery({
     queryKey: ['articles'],
     queryFn: fetchArticles,
   })
@@ -17,7 +17,10 @@ export default function ArticlesPage() {
         Thoughts on engineering, system design, and the craft of building software.
       </p>
       <div className="w-12 h-1 bg-main-red mb-10" />
-      {!isLoading && articles?.length === 0 && (
+      {isError && (
+        <p className="text-red-400 text-sm mb-6">Failed to load articles.</p>
+      )}
+      {!isLoading && !isError && articles?.length === 0 && (
         <p className="text-main-white/60">No articles yet.</p>
       )}
       <div className="flex flex-col">

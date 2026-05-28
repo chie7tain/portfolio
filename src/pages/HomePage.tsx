@@ -31,9 +31,9 @@ const heroSocials = [
 ];
 
 export default function HomePage() {
-  const { data: allProjects, isLoading: loadingProjects } = useQuery({ queryKey: ['projects'], queryFn: fetchProjects })
-  const { data: allArticles, isLoading: loadingArticles } = useQuery({ queryKey: ['articles'], queryFn: fetchArticles })
-  const { data: allMedia, isLoading: loadingMedia } = useQuery({ queryKey: ['media'], queryFn: fetchMedia })
+  const { data: allProjects, isLoading: loadingProjects, isError: errorProjects } = useQuery({ queryKey: ['projects'], queryFn: fetchProjects })
+  const { data: allArticles, isLoading: loadingArticles, isError: errorArticles } = useQuery({ queryKey: ['articles'], queryFn: fetchArticles })
+  const { data: allMedia, isLoading: loadingMedia, isError: errorMedia } = useQuery({ queryKey: ['media'], queryFn: fetchMedia })
 
   const projects = allProjects?.slice(0, 3)
   const articles = allArticles?.slice(0, 3)
@@ -154,6 +154,8 @@ export default function HomePage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {loadingProjects
             ? Array.from({ length: 3 }).map((_, i) => <ProjectCardSkeleton key={i} />)
+            : errorProjects
+            ? <p className="text-red-400 text-sm col-span-3">Failed to load projects.</p>
             : projects?.map((p) => <ProjectCard key={p.id} project={p} />)}
         </div>
       </section>
@@ -178,6 +180,8 @@ export default function HomePage() {
         <div className="flex flex-col">
           {loadingArticles
             ? Array.from({ length: 3 }).map((_, i) => <ArticleCardSkeleton key={i} />)
+            : errorArticles
+            ? <p className="text-red-400 text-sm">Failed to load articles.</p>
             : articles?.map((a) => <ArticleCard key={a.id} article={a} />)}
         </div>
       </section>
@@ -202,6 +206,8 @@ export default function HomePage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {loadingMedia
             ? Array.from({ length: 3 }).map((_, i) => <MediaCardSkeleton key={i} />)
+            : errorMedia
+            ? <p className="text-red-400 text-sm col-span-3">Failed to load media.</p>
             : media?.map((m) => <MediaCard key={m.id} item={m} />)}
         </div>
       </section>

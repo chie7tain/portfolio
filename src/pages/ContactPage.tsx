@@ -47,7 +47,7 @@ export default function ContactPage() {
           </button>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="max-w-lg space-y-5" noValidate>
+        <form onSubmit={handleSubmit} className="max-w-lg space-y-5">
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-main-white/60 mb-2">
               Name
