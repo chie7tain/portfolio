@@ -37,6 +37,15 @@ export async function fetchMedia(): Promise<MediaItem[]> {
   return res.json()
 }
 
+export async function submitContact(body: { name: string; email: string; message: string }): Promise<void> {
+  const res = await fetch(`${BASE_URL}/contact`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  })
+  if (!res.ok) throw new Error('Failed to send message')
+}
+
 // Used by LoginPage to validate a key without triggering a hard redirect on 401
 export async function validateKey(key: string): Promise<void> {
   const res = await fetch(`${BASE_URL}/admin/projects`, {
