@@ -9,208 +9,265 @@ import MediaCard from "../components/MediaCard";
 import ProjectCardSkeleton from "../components/ProjectCardSkeleton";
 import ArticleCardSkeleton from "../components/ArticleCardSkeleton";
 import MediaCardSkeleton from "../components/MediaCardSkeleton";
+import Reveal from "../components/Reveal";
 
 const techStack = ["Node.js", "React", "TypeScript", "PostgreSQL", "Docker"];
 
+const skills = [
+  "API Design",
+  "Node.js / Express",
+  "React / TypeScript",
+  "PostgreSQL",
+  "Docker / CI·CD",
+  "System Design",
+];
+
 const heroSocials = [
-  {
-    label: "GitHub profile",
-    href: "https://github.com/chie7tain",
-    Icon: FaGithub,
-  },
+  { label: "GitHub profile", href: "https://github.com/chie7tain", Icon: FaGithub },
   {
     label: "LinkedIn profile",
     href: "https://linkedin.com/in/ifeanyi-okwuobi",
     Icon: FaLinkedin,
   },
-  {
-    label: "Twitter profile",
-    href: "https://twitter.com/chie7tain",
-    Icon: FaXTwitter,
-  },
+  { label: "Twitter profile", href: "https://twitter.com/chie7tain", Icon: FaXTwitter },
 ];
 
-export default function HomePage() {
-  const { data: allProjects, isLoading: loadingProjects, isError: errorProjects } = useQuery({ queryKey: ['projects'], queryFn: fetchProjects })
-  const { data: allArticles, isLoading: loadingArticles, isError: errorArticles } = useQuery({ queryKey: ['articles'], queryFn: fetchArticles })
-  const { data: allMedia, isLoading: loadingMedia, isError: errorMedia } = useQuery({ queryKey: ['media'], queryFn: fetchMedia })
+/** Section masthead — kicker number + title, with an index link on the right. */
+function SectionHead({
+  index,
+  eyebrow,
+  title,
+  to,
+  linkLabel,
+}: {
+  index: string;
+  eyebrow: string;
+  title: string;
+  to: string;
+  linkLabel: string;
+}) {
+  return (
+    <div className="flex items-end justify-between gap-4 border-b-2 border-ink pb-4 mb-2">
+      <div>
+        <span className="font-mono text-[0.68rem] uppercase tracking-[0.25em] text-vermilion">
+          § {index} — {eyebrow}
+        </span>
+        <h2 className="font-display text-3xl md:text-[2.6rem] font-semibold tracking-tight text-ink leading-none mt-2">
+          {title}
+        </h2>
+      </div>
+      <Link
+        to={to}
+        aria-label={linkLabel}
+        className="shrink-0 font-mono text-[0.68rem] uppercase tracking-[0.15em] text-ink hover:text-vermilion transition-colors pb-1"
+      >
+        {linkLabel} →
+      </Link>
+    </div>
+  );
+}
 
-  const projects = allProjects?.slice(0, 3)
-  const articles = allArticles?.slice(0, 3)
-  const media = allMedia?.slice(0, 3)
+export default function HomePage() {
+  const {
+    data: allProjects,
+    isLoading: loadingProjects,
+    isError: errorProjects,
+  } = useQuery({ queryKey: ["projects"], queryFn: fetchProjects });
+  const {
+    data: allArticles,
+    isLoading: loadingArticles,
+    isError: errorArticles,
+  } = useQuery({ queryKey: ["articles"], queryFn: fetchArticles });
+  const {
+    data: allMedia,
+    isLoading: loadingMedia,
+    isError: errorMedia,
+  } = useQuery({ queryKey: ["media"], queryFn: fetchMedia });
+
+  const projects = allProjects?.slice(0, 3);
+  const articles = allArticles?.slice(0, 3);
+  const media = allMedia?.slice(0, 3);
 
   return (
-    <div className="max-w-5xl mx-auto px-6">
-      {/* Hero */}
-      <section
-        className="py-24 md:py-36 relative"
-        style={{
-          background:
-            "radial-gradient(ellipse 80% 60% at 0% 0%, rgba(190,49,68,0.08) 0%, transparent 70%)",
-        }}
-      >
-        <div className="flex items-center gap-2 mb-6">
-          <span className="relative flex h-2.5 w-2.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
-            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500" />
+    <div className="max-w-6xl mx-auto px-6 relative z-10">
+      {/* ── Cover ─────────────────────────────────────────────────────────── */}
+      <section className="pt-16 pb-20 md:pt-24 md:pb-28">
+        <div className="reveal is-visible" style={{ animationDelay: "0ms" }}>
+          <div className="flex items-center gap-2.5 mb-8">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-vermilion opacity-60" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-vermilion" />
+            </span>
+            <span className="font-mono text-[0.68rem] font-medium text-faded uppercase tracking-[0.3em]">
+              Open to work
+            </span>
+          </div>
+        </div>
+
+        {/* Byline — the name lives here as its own line */}
+        <div
+          className="reveal is-visible flex flex-wrap items-baseline gap-x-4 gap-y-1 mb-6"
+          style={{ animationDelay: "80ms" }}
+        >
+          <span className="font-display text-lg font-medium text-ink">
+            Ifeanyi Okwuobi
           </span>
-          <span className="text-xs font-medium text-main-white/60 uppercase tracking-widest">
-            Open to work
+          <span aria-hidden="true" className="text-hairline">
+            /
+          </span>
+          <span className="font-mono text-[0.72rem] uppercase tracking-[0.2em] text-faded">
+            Full-stack engineer · Lagos, NG
           </span>
         </div>
 
-        <h1 className="text-5xl md:text-7xl font-black tracking-tight leading-none mb-4">
-          Ifeanyi Okwuobi
+        {/* Statement headline */}
+        <h1
+          className="reveal is-visible font-display font-semibold tracking-[-0.02em] text-ink leading-[0.92] text-[3.25rem] sm:text-7xl md:text-[6rem]"
+          style={{ animationDelay: "160ms" }}
+        >
+          I build the systems
+          <br />
+          <span className="italic text-vermilion">behind the screen.</span>
         </h1>
 
-        <p className="text-sm text-main-white/40 mb-5 tracking-wide">
-          Lagos, Nigeria · Remote
+        {/* Deck */}
+        <p
+          className="reveal is-visible mt-8 max-w-2xl text-lg md:text-xl text-ink-soft leading-relaxed"
+          style={{ animationDelay: "240ms" }}
+        >
+          A full-stack software engineer building{" "}
+          <span className="text-ink font-medium">scalable, data-driven</span>{" "}
+          applications and web platforms — from database schema to real-time
+          event pipelines.
         </p>
 
-        <p className="text-lg md:text-xl text-main-white/70 max-w-xl mb-8">
-          Full-stack software engineer. I build scalable, data-driven
-          applications and web platforms.
-        </p>
-
-        <div className="flex flex-wrap gap-2 mb-8">
-          {techStack.map((tech) => (
-            <span
-              key={tech}
-              className="text-xs font-medium px-3 py-1.5 rounded-full border border-white/10 text-main-white/60 bg-white/5"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
-
-        <div className="flex items-center gap-5">
-          {heroSocials.map(({ label, href, Icon }) => (
-            <a
-              key={label}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={label}
-              className="text-main-white/40 hover:text-main-white transition-colors"
-            >
-              <Icon size={18} />
-            </a>
-          ))}
-        </div>
-      </section>
-
-      {/* About */}
-      <section className="py-12 border-t border-white/5 -mx-6 px-6" style={{ background: 'rgba(190,49,68,0.05)' }}>
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-main-red mb-4">
-          About
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
-          <p className="text-main-white/70 leading-relaxed">
-            I'm a full-stack engineer focused on backend systems, APIs, and
-            developer tooling. I've shipped production software across fintech,
-            SaaS, and media from database schema design to real-time event
-            pipelines. I care about clean architecture and code that doesn't
-            need a legend to read.
-          </p>
-          <div className="grid grid-cols-2 gap-3">
-            {[
-              "API Design",
-              "Node.js / Express",
-              "React / TypeScript",
-              "PostgreSQL",
-              "Docker / CI/CD",
-              "System Design",
-            ].map((skill) => (
-              <div
-                key={skill}
-                className="flex items-center gap-2 text-sm text-main-white/70"
+        {/* Tech + socials */}
+        <div
+          className="reveal is-visible mt-10 flex flex-col sm:flex-row sm:items-center gap-6 sm:gap-10"
+          style={{ animationDelay: "320ms" }}
+        >
+          <ul className="flex flex-wrap gap-x-5 gap-y-2">
+            {techStack.map((tech) => (
+              <li
+                key={tech}
+                className="font-mono text-[0.7rem] uppercase tracking-[0.12em] text-faded"
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-main-red shrink-0" />
-                {skill}
-              </div>
+                {tech}
+              </li>
+            ))}
+          </ul>
+          <span className="hidden sm:block w-px h-5 bg-hairline" aria-hidden="true" />
+          <div className="flex items-center gap-5">
+            {heroSocials.map(({ label, href, Icon }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="text-ink/50 hover:text-vermilion transition-colors"
+              >
+                <Icon size={18} />
+              </a>
             ))}
           </div>
         </div>
       </section>
 
+      {/* ── About ─────────────────────────────────────────────────────────── */}
+      <Reveal as="section" className="py-14 border-t-2 border-ink">
+        <span className="font-mono text-[0.68rem] uppercase tracking-[0.25em] text-vermilion">
+          § 01 — About
+        </span>
+        <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-10 md:gap-16 items-start mt-6">
+          <p className="dropcap font-display text-xl md:text-2xl leading-relaxed text-ink-soft">
+            I&apos;m a full-stack engineer focused on backend systems, APIs, and
+            developer tooling. I&apos;ve shipped production software across
+            fintech, SaaS, and media — from database schema design to real-time
+            event pipelines. I care about clean architecture and code that
+            doesn&apos;t need a legend to read.
+          </p>
+          <ul className="border-t border-hairline">
+            {skills.map((skill, i) => (
+              <li
+                key={skill}
+                className="flex items-baseline gap-4 py-3 border-b border-hairline"
+              >
+                <span className="font-mono text-[0.7rem] text-vermilion tabular-nums">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="text-ink font-medium">{skill}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Reveal>
 
-      {/* Featured Projects */}
-      <section className="py-12 border-t border-white/5">
-        <div className="flex items-end justify-between mb-8">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-main-red mb-1">
-              Work
-            </p>
-            <h2 className="text-2xl font-bold">Selected Projects</h2>
-          </div>
-          <Link
-            to="/projects"
-            aria-label="See all projects"
-            className="text-sm text-main-red hover:underline"
-          >
-            See all projects →
-          </Link>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {loadingProjects
-            ? Array.from({ length: 3 }).map((_, i) => <ProjectCardSkeleton key={i} />)
-            : errorProjects
-            ? <p className="text-red-400 text-sm col-span-3">Failed to load projects.</p>
-            : projects?.map((p) => <ProjectCard key={p.id} project={p} />)}
-        </div>
-      </section>
-
-      {/* Featured Articles */}
-      <section className="py-12 border-t border-white/5 -mx-6 px-6" style={{ background: 'rgba(190,49,68,0.05)' }}>
-        <div className="flex items-end justify-between mb-8">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-main-red mb-1">
-              Writing
-            </p>
-            <h2 className="text-2xl font-bold">Selected Articles</h2>
-          </div>
-          <Link
-            to="/articles"
-            aria-label="See all articles"
-            className="text-sm text-main-red hover:underline"
-          >
-            See all articles →
-          </Link>
-        </div>
+      {/* ── Selected Work ─────────────────────────────────────────────────── */}
+      <Reveal as="section" className="py-14 border-t border-hairline">
+        <SectionHead
+          index="02"
+          eyebrow="Work"
+          title="Selected Projects"
+          to="/projects"
+          linkLabel="See all projects"
+        />
         <div className="flex flex-col">
-          {loadingArticles
-            ? Array.from({ length: 3 }).map((_, i) => <ArticleCardSkeleton key={i} />)
-            : errorArticles
-            ? <p className="text-red-400 text-sm">Failed to load articles.</p>
-            : articles?.map((a) => <ArticleCard key={a.id} article={a} />)}
-        </div>
-      </section>
-
-      {/* Featured Media */}
-      <section className="py-12 border-t border-white/5">
-        <div className="flex items-end justify-between mb-8">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-main-red mb-1">
-              Media
+          {loadingProjects ? (
+            Array.from({ length: 3 }).map((_, i) => <ProjectCardSkeleton key={i} />)
+          ) : errorProjects ? (
+            <p className="py-8 font-mono text-sm text-vermilion">
+              Something went wrong loading projects.
             </p>
-            <h2 className="text-2xl font-bold">Selected Media</h2>
-          </div>
-          <Link
-            to="/media"
-            aria-label="See all media"
-            className="text-sm text-main-red hover:underline"
-          >
-            See all media →
-          </Link>
+          ) : (
+            projects?.map((p, i) => <ProjectCard key={p.id} project={p} index={i} />)
+          )}
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {loadingMedia
-            ? Array.from({ length: 3 }).map((_, i) => <MediaCardSkeleton key={i} />)
-            : errorMedia
-            ? <p className="text-red-400 text-sm col-span-3">Failed to load media.</p>
-            : media?.map((m) => <MediaCard key={m.id} item={m} />)}
+      </Reveal>
+
+      {/* ── Selected Writing ──────────────────────────────────────────────── */}
+      <Reveal as="section" className="py-14 border-t border-hairline">
+        <SectionHead
+          index="03"
+          eyebrow="Writing"
+          title="Selected Articles"
+          to="/articles"
+          linkLabel="See all articles"
+        />
+        <div className="flex flex-col">
+          {loadingArticles ? (
+            Array.from({ length: 3 }).map((_, i) => <ArticleCardSkeleton key={i} />)
+          ) : errorArticles ? (
+            <p className="py-8 font-mono text-sm text-vermilion">
+              Something went wrong loading articles.
+            </p>
+          ) : (
+            articles?.map((a) => <ArticleCard key={a.id} article={a} />)
+          )}
         </div>
-      </section>
+      </Reveal>
+
+      {/* ── Selected Media ────────────────────────────────────────────────── */}
+      <Reveal as="section" className="py-14 border-t border-hairline">
+        <SectionHead
+          index="04"
+          eyebrow="Media"
+          title="Selected Media"
+          to="/media"
+          linkLabel="See all media"
+        />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+          {loadingMedia ? (
+            Array.from({ length: 3 }).map((_, i) => <MediaCardSkeleton key={i} />)
+          ) : errorMedia ? (
+            <p className="col-span-3 py-8 font-mono text-sm text-vermilion">
+              Something went wrong loading media.
+            </p>
+          ) : (
+            media?.map((m) => <MediaCard key={m.id} item={m} />)
+          )}
+        </div>
+      </Reveal>
     </div>
   );
 }

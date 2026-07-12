@@ -10,19 +10,31 @@ export default function MediaPage() {
   })
 
   return (
-    <div className="max-w-5xl mx-auto px-6 py-16">
-      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-main-red mb-3">Media</p>
-      <h1 className="text-4xl font-black mb-2">Media</h1>
-      <p className="text-main-white/50 mb-4 max-w-lg text-sm">
-        Podcasts, conference talks, and videos where I've shared ideas publicly.
-      </p>
-      <div className="w-12 h-1 bg-main-red mb-10" />
+    <div className="max-w-6xl mx-auto px-6 pt-14 pb-24 relative z-10">
+      <header className="border-b-2 border-ink pb-8 mb-10">
+        <span className="font-mono text-[0.7rem] uppercase tracking-[0.3em] text-vermilion">
+          § 04 — Media
+        </span>
+        <h1 className="font-display text-5xl md:text-7xl font-semibold tracking-[-0.02em] text-ink leading-[0.95] mt-4">
+          Media
+        </h1>
+        <p className="mt-5 max-w-xl text-ink-soft leading-relaxed">
+          Podcasts, conference talks, and videos where I&apos;ve shared ideas
+          publicly.
+        </p>
+      </header>
+
       {isError && (
-        <p className="text-red-400 text-sm mb-6">Failed to load media.</p>
+        <p className="py-8 font-mono text-sm text-vermilion">
+          Something went wrong loading media.
+        </p>
       )}
       {!isLoading && !isError && media?.length === 0 && (
-        <p className="text-main-white/60">No media yet.</p>
+        <p className="py-8 font-mono text-sm text-faded uppercase tracking-wider">
+          No media yet.
+        </p>
       )}
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {isLoading
           ? Array.from({ length: 3 }).map((_, i) => <MediaCardSkeleton key={i} />)
