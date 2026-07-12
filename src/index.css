@@ -2,24 +2,193 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
+  /* ── Legacy palette — retained for the /admin CMS (unchanged) ───────────── */
   --color-main-black: #1e1f26;
   --color-main-red: #be3144;
   --color-main-white: #f0f0f0;
   --color-main-blue: #45567d;
   --color-main-dark-blue: #1a2b53;
-  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  /* ── Editorial palette — the public publication ────────────────────────── */
+  --color-paper: #f5f1e8; /* warm ivory canvas */
+  --color-paper-deep: #ece5d7; /* recessed panels / bands */
+  --color-ink: #1c1a17; /* warm near-black */
+  --color-ink-soft: #3a352d; /* long-form body text */
+  --color-faded: #6b6459; /* metadata / secondary */
+  --color-vermilion: #c43d2e; /* the single accent */
+  --color-vermilion-deep: #a52f22;
+  --color-hairline: rgba(28, 26, 23, 0.14);
+
+  /* ── Type voices ───────────────────────────────────────────────────────── */
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif; /* admin */
+  --font-body: "Libre Franklin", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
+  --font-mono: "Spline Sans Mono", ui-monospace, "SFMono-Regular", monospace;
 }
 
 @layer base {
+  /* ── Night edition ─────────────────────────────────────────────────────
+     A designed dark counterpart, not an inversion. Tailwind v4 utilities
+     reference the token variables, so overriding them under [data-theme]
+     re-skins the whole public site at runtime. The accent lifts to stay
+     vivid on near-black, and the grain flips to a screen blend. Opt-in only
+     (default is paper); the /admin CMS uses separate --color-main-* tokens
+     and is unaffected. */
+  :root {
+    color-scheme: light;
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --color-paper: #0e1a30; /* deep navy canvas */
+    --color-paper-deep: #182a4a; /* recessed navy panels / bands */
+    --color-ink: #e9ebf1; /* cool near-white */
+    --color-ink-soft: #bcc2d0; /* long-form body text */
+    --color-faded: #838da3; /* metadata / secondary (slate) */
+    --color-vermilion: #e0553f; /* lifted so it stays vivid on navy */
+    --color-vermilion-deep: #c8432f;
+    --color-hairline: rgba(233, 235, 241, 0.15);
+  }
+
+  /* Keep article code blocks navy-toned in the night edition */
+  :root[data-theme="dark"] .prose-editorial {
+    --tw-prose-pre-bg: #0a1424;
+    --tw-prose-pre-code: #e9ebf1;
+  }
+
+  body {
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Fraunces reads best a touch heavier optically at display sizes */
+  .font-display {
+    font-optical-sizing: auto;
+    font-variation-settings: "opsz" 96;
+  }
+
+  /* Faint pressed-paper grain across the whole surface */
   body::before {
-    content: '';
+    content: "";
     position: fixed;
     inset: 0;
     pointer-events: none;
     z-index: 0;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     background-repeat: repeat;
-    background-size: 200px 200px;
-    opacity: 0.025;
+    background-size: 220px 220px;
+    opacity: 0.04;
+    mix-blend-mode: multiply;
+  }
+
+  /* On dark, multiply is invisible — flip to screen so grain lightens instead */
+  :root[data-theme="dark"] body::before {
+    mix-blend-mode: screen;
+    opacity: 0.05;
+  }
+
+  ::selection {
+    background: var(--color-vermilion);
+    color: var(--color-paper);
+  }
+
+  :where(a, button, input, textarea, select):focus-visible {
+    outline: 2px solid var(--color-vermilion);
+    outline-offset: 3px;
+    border-radius: 1px;
+  }
+}
+
+@layer components {
+  /* Editorial drop cap — the opening initial of a lede paragraph */
+  .dropcap::first-letter {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--color-vermilion);
+    float: left;
+    font-size: 3.5em;
+    line-height: 0.72;
+    padding: 0.06em 0.1em 0 0;
+    margin-top: 0.02em;
+  }
+
+  /* Long-form article body, tuned to the paper palette */
+  .prose-editorial {
+    --tw-prose-body: var(--color-ink-soft);
+    --tw-prose-headings: var(--color-ink);
+    --tw-prose-lead: var(--color-faded);
+    --tw-prose-links: var(--color-vermilion);
+    --tw-prose-bold: var(--color-ink);
+    --tw-prose-counters: var(--color-faded);
+    --tw-prose-bullets: var(--color-vermilion);
+    --tw-prose-hr: var(--color-hairline);
+    --tw-prose-quotes: var(--color-ink);
+    --tw-prose-quote-borders: var(--color-vermilion);
+    --tw-prose-captions: var(--color-faded);
+    --tw-prose-code: var(--color-ink);
+    --tw-prose-pre-code: #e8e3d6;
+    --tw-prose-pre-bg: #26231d;
+    --tw-prose-th-borders: var(--color-hairline);
+    --tw-prose-td-borders: var(--color-hairline);
+
+    font-family: var(--font-body);
+  }
+  .prose-editorial :is(h1, h2, h3, h4) {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+  .prose-editorial a {
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+  }
+}
+
+@layer utilities {
+  /* Scroll / load reveal — opacity-only until triggered, motion added on view */
+  .reveal {
+    opacity: 0;
+  }
+  .reveal.is-visible {
+    animation: editorial-rise 0.8s cubic-bezier(0.22, 0.68, 0.24, 1) forwards;
+  }
+
+  @keyframes editorial-rise {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Hairline rule that draws itself in from the left */
+  .rule-draw {
+    transform-origin: left center;
+    animation: rule-grow 0.9s cubic-bezier(0.22, 0.68, 0.24, 1) forwards;
+  }
+  @keyframes rule-grow {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal,
+    .reveal.is-visible {
+      opacity: 1 !important;
+      animation: none !important;
+      transform: none !important;
+    }
+    .rule-draw {
+      animation: none !important;
+      transform: none !important;
+    }
   }
 }

@@ -21,35 +21,45 @@ export default function ContactPage() {
     mutate({ name, email, message })
   }
 
-  const inputClass =
-    'w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-main-white placeholder:text-main-white/30 focus:outline-none focus:border-main-red/60 transition-colors'
+  const fieldClass =
+    'w-full bg-transparent border-0 border-b border-ink/25 px-0 py-3 text-ink placeholder:text-faded/50 focus:outline-none focus:border-vermilion transition-colors'
+  const labelClass =
+    'block font-mono text-[0.68rem] uppercase tracking-[0.2em] text-faded mb-1'
 
   return (
-    <div className="max-w-5xl mx-auto px-6 py-16">
-      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-main-red mb-3">Contact</p>
-      <h1 className="text-4xl font-black mb-2">Get in touch</h1>
-      <p className="text-main-white/50 mb-4 max-w-lg text-sm">
-        Have a project in mind, a question, or just want to say hi? Send a message and I'll get back to you.
-      </p>
-      <div className="w-12 h-1 bg-main-red mb-10" />
+    <div className="max-w-6xl mx-auto px-6 pt-14 pb-24 relative z-10">
+      <header className="border-b-2 border-ink pb-8 mb-12">
+        <span className="font-mono text-[0.7rem] uppercase tracking-[0.3em] text-vermilion">
+          § 05 — Correspondence
+        </span>
+        <h1 className="font-display text-5xl md:text-7xl font-semibold tracking-[-0.02em] text-ink leading-[0.95] mt-4">
+          Get in touch
+        </h1>
+        <p className="mt-5 max-w-xl text-ink-soft leading-relaxed">
+          Have a project in mind, a question, or just want to say hello? Send a
+          note and I&apos;ll get back to you.
+        </p>
+      </header>
 
       {isSuccess ? (
         <div className="max-w-lg">
-          <p className="text-main-white/80 text-lg font-semibold mb-2">Message sent.</p>
-          <p className="text-main-white/50 text-sm">
-            Thanks for reaching out — I'll get back to you soon.
+          <p className="font-display text-3xl font-semibold text-ink mb-3">
+            Message sent.
+          </p>
+          <p className="text-ink-soft">
+            Thanks for reaching out — I&apos;ll get back to you soon.
           </p>
           <button
             onClick={reset}
-            className="mt-6 text-sm text-main-red hover:underline"
+            className="mt-8 font-mono text-xs uppercase tracking-[0.15em] text-vermilion hover:underline underline-offset-4"
           >
-            Send another message
+            ← Send another message
           </button>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="max-w-lg space-y-5">
+        <form onSubmit={handleSubmit} className="max-w-xl space-y-8">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-main-white/60 mb-2">
+            <label htmlFor="name" className={labelClass}>
               Name
             </label>
             <input
@@ -59,13 +69,13 @@ export default function ContactPage() {
               autoComplete="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className={inputClass}
+              className={fieldClass}
               placeholder="Your name"
             />
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-main-white/60 mb-2">
+            <label htmlFor="email" className={labelClass}>
               Email
             </label>
             <input
@@ -75,13 +85,13 @@ export default function ContactPage() {
               autoComplete="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className={inputClass}
+              className={fieldClass}
               placeholder="you@example.com"
             />
           </div>
 
           <div>
-            <label htmlFor="message" className="block text-sm font-medium text-main-white/60 mb-2">
+            <label htmlFor="message" className={labelClass}>
               Message
             </label>
             <textarea
@@ -90,13 +100,13 @@ export default function ContactPage() {
               rows={6}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              className={`${inputClass} resize-none`}
+              className={`${fieldClass} resize-none`}
               placeholder="What's on your mind?"
             />
           </div>
 
           {isError && (
-            <p className="text-sm text-red-400">
+            <p className="font-mono text-sm text-vermilion">
               Something went wrong. Please try again.
             </p>
           )}
@@ -104,9 +114,15 @@ export default function ContactPage() {
           <button
             type="submit"
             disabled={isPending}
-            className="px-6 py-3 bg-main-red text-main-white font-semibold rounded-lg hover:bg-main-red/80 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="group inline-flex items-center gap-3 bg-ink text-paper font-mono text-xs uppercase tracking-[0.2em] px-8 py-4 hover:bg-vermilion transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isPending ? 'Sending…' : 'Send message'}
+            <span
+              aria-hidden="true"
+              className="transition-transform duration-300 group-hover:translate-x-1"
+            >
+              →
+            </span>
           </button>
         </form>
       )}

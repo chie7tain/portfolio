@@ -19,7 +19,14 @@ function AppShell() {
   const isAdmin = pathname.startsWith('/admin')
 
   return (
-    <div className="min-h-screen flex flex-col bg-main-black text-main-white font-sans">
+    <div
+      className={[
+        "min-h-screen flex flex-col relative",
+        isAdmin
+          ? "bg-main-black text-main-white font-sans"
+          : "bg-paper text-ink font-body",
+      ].join(" ")}
+    >
       {!isAdmin && <Nav />}
       <main className="flex-1">
         <Routes>

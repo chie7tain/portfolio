@@ -32,6 +32,10 @@ _Avoid_: Protected route, private route
 The component that checks `sessionStorage` for a valid API key before rendering an Admin Route. Redirects to `/admin/login` if no key is found.
 _Avoid_: Auth wrapper, private route wrapper
 
+**Admin resource**:
+The configurable module behind every Admin content-management Page — `AdminResourcePage` owns the table + form chrome, driven by the `useAdminResource` load/create/edit/delete/save state machine. Each content type supplies only its fields, columns, and api quartet.
+_Avoid_: CRUD component, resource manager, generic table
+
 **Contact Page**:
 The public page at `/contact` where a site visitor can send a message to the Admin. Distinct from Admin Routes — no authentication required.
 _Avoid_: Contact form page, reach out page
