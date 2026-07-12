@@ -30,6 +30,7 @@ export default function Nav() {
 
         <div className="flex items-center gap-5 md:gap-8">
           <nav
+            id="primary-nav"
             role="navigation"
             data-open={String(open)}
             className={[
@@ -40,7 +41,7 @@ export default function Nav() {
             ].join(' ')}
           >
             {links.map(({ label, to }) => {
-              const active = pathname === to
+              const active = pathname === to || pathname.startsWith(`${to}/`)
               return (
                 <Link
                   key={to}
@@ -77,6 +78,8 @@ export default function Nav() {
 
           <button
             aria-label="menu"
+            aria-expanded={open}
+            aria-controls="primary-nav"
             onClick={() => setOpen((o) => !o)}
             className="md:hidden flex flex-col gap-1.5 p-2"
           >

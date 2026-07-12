@@ -2,12 +2,8 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import Markdown from 'react-markdown'
 import { fetchArticle } from '../api'
+import { readingTime } from '../utils/readingTime'
 import type { Article } from '@shared/types'
-
-function readingTime(body: string): number {
-  const words = body.trim().split(/\s+/).filter(Boolean).length
-  return Math.max(1, Math.round(words / 200))
-}
 
 export default function ArticlePage() {
   const { id } = useParams<{ id: string }>()

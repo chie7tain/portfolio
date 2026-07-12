@@ -131,6 +131,7 @@
     --tw-prose-pre-bg: #26231d;
     --tw-prose-th-borders: var(--color-hairline);
     --tw-prose-td-borders: var(--color-hairline);
+
     font-family: var(--font-body);
   }
   .prose-editorial :is(h1, h2, h3, h4) {

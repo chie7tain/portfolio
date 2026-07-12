@@ -1,14 +1,9 @@
-import { useQuery } from '@tanstack/react-query'
+import ContentFeed from '../components/ContentFeed'
 import { fetchArticles } from '../api'
 import ArticleCard from '../components/ArticleCard'
 import ArticleCardSkeleton from '../components/ArticleCardSkeleton'
 
 export default function ArticlesPage() {
-  const { data: articles, isLoading, isError } = useQuery({
-    queryKey: ['articles'],
-    queryFn: fetchArticles,
-  })
-
   return (
     <div className="max-w-6xl mx-auto px-6 pt-14 pb-24 relative z-10">
       <header className="border-b-2 border-ink pb-8 mb-4">
@@ -24,22 +19,16 @@ export default function ArticlesPage() {
         </p>
       </header>
 
-      {isError && (
-        <p className="py-8 font-mono text-sm text-vermilion">
-          Something went wrong loading articles.
-        </p>
-      )}
-      {!isLoading && !isError && articles?.length === 0 && (
-        <p className="py-8 font-mono text-sm text-faded uppercase tracking-wider">
-          No articles yet.
-        </p>
-      )}
-
-      <div className="flex flex-col">
-        {isLoading
-          ? Array.from({ length: 4 }).map((_, i) => <ArticleCardSkeleton key={i} />)
-          : articles?.map((a) => <ArticleCard key={a.id} article={a} />)}
-      </div>
+      <ContentFeed
+        queryKey={['articles']}
+        queryFn={fetchArticles}
+        renderItem={(a) => <ArticleCard key={a.id} article={a} />}
+        Skeleton={ArticleCardSkeleton}
+        skeletonCount={4}
+        layout="stack"
+        errorLabel="Something went wrong loading articles."
+        emptyLabel="No articles yet."
+      />
     </div>
   )
 }

@@ -81,7 +81,9 @@ Editorial restraint — confident, not busy:
 - One staged page load: masthead rule draws in, headline words rise-and-fade in stagger,
   sections fade up on scroll.
 - Index rows: crisp hover (accent slide + marker + thumbnail peek).
-- Orchestration via the **`motion`** library (new dependency); everything else CSS.
+- Motion is **CSS-driven**, orchestrated by a small in-house `Reveal` component: an
+  IntersectionObserver toggles a class and the animation itself is pure CSS. No motion
+  library (see Dependencies).
 - All motion respects `prefers-reduced-motion`.
 
 ## Dependencies

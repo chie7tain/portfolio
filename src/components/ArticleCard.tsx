@@ -1,10 +1,6 @@
 import { Link } from 'react-router-dom'
+import { readingTime } from '../utils/readingTime'
 import type { Article } from '@shared/types'
-
-function readingTime(body: string): number {
-  const words = body.trim().split(/\s+/).filter(Boolean).length
-  return Math.max(1, Math.round(words / 200))
-}
 
 export default function ArticleCard({ article }: { article: Article }) {
   const date = article.publishedAt
@@ -37,7 +33,7 @@ export default function ArticleCard({ article }: { article: Article }) {
           {article.title}
         </h3>
         <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[0.68rem] uppercase tracking-[0.15em] text-faded">
-          {date && <time>{date}</time>}
+          {date && <time dateTime={article.publishedAt ?? undefined}>{date}</time>}
           {date && <span aria-hidden="true">·</span>}
           <span>{readingTime(article.body)} min read</span>
         </div>

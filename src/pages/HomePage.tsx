@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import { useQuery } from "@tanstack/react-query";
+import ContentFeed from "../components/ContentFeed";
 import { fetchProjects, fetchArticles, fetchMedia } from "../api";
 import ProjectCard from "../components/ProjectCard";
 import ArticleCard from "../components/ArticleCard";
@@ -68,26 +68,6 @@ function SectionHead({
 }
 
 export default function HomePage() {
-  const {
-    data: allProjects,
-    isLoading: loadingProjects,
-    isError: errorProjects,
-  } = useQuery({ queryKey: ["projects"], queryFn: fetchProjects });
-  const {
-    data: allArticles,
-    isLoading: loadingArticles,
-    isError: errorArticles,
-  } = useQuery({ queryKey: ["articles"], queryFn: fetchArticles });
-  const {
-    data: allMedia,
-    isLoading: loadingMedia,
-    isError: errorMedia,
-  } = useQuery({ queryKey: ["media"], queryFn: fetchMedia });
-
-  const projects = allProjects?.slice(0, 3);
-  const articles = allArticles?.slice(0, 3);
-  const media = allMedia?.slice(0, 3);
-
   return (
     <div className="max-w-6xl mx-auto px-6 relative z-10">
       {/* ── Cover ─────────────────────────────────────────────────────────── */}
@@ -212,17 +192,16 @@ export default function HomePage() {
           to="/projects"
           linkLabel="See all projects"
         />
-        <div className="flex flex-col">
-          {loadingProjects ? (
-            Array.from({ length: 3 }).map((_, i) => <ProjectCardSkeleton key={i} />)
-          ) : errorProjects ? (
-            <p className="py-8 font-mono text-sm text-vermilion">
-              Something went wrong loading projects.
-            </p>
-          ) : (
-            projects?.map((p, i) => <ProjectCard key={p.id} project={p} index={i} />)
-          )}
-        </div>
+        <ContentFeed
+          queryKey={["projects"]}
+          queryFn={fetchProjects}
+          renderItem={(p, i) => <ProjectCard key={p.id} project={p} index={i} />}
+          Skeleton={ProjectCardSkeleton}
+          skeletonCount={3}
+          layout="stack"
+          errorLabel="Something went wrong loading projects."
+          limit={3}
+        />
       </Reveal>
 
       {/* ── Selected Writing ──────────────────────────────────────────────── */}
@@ -234,17 +213,16 @@ export default function HomePage() {
           to="/articles"
           linkLabel="See all articles"
         />
-        <div className="flex flex-col">
-          {loadingArticles ? (
-            Array.from({ length: 3 }).map((_, i) => <ArticleCardSkeleton key={i} />)
-          ) : errorArticles ? (
-            <p className="py-8 font-mono text-sm text-vermilion">
-              Something went wrong loading articles.
-            </p>
-          ) : (
-            articles?.map((a) => <ArticleCard key={a.id} article={a} />)
-          )}
-        </div>
+        <ContentFeed
+          queryKey={["articles"]}
+          queryFn={fetchArticles}
+          renderItem={(a) => <ArticleCard key={a.id} article={a} />}
+          Skeleton={ArticleCardSkeleton}
+          skeletonCount={3}
+          layout="stack"
+          errorLabel="Something went wrong loading articles."
+          limit={3}
+        />
       </Reveal>
 
       {/* ── Selected Media ────────────────────────────────────────────────── */}
@@ -256,17 +234,17 @@ export default function HomePage() {
           to="/media"
           linkLabel="See all media"
         />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-          {loadingMedia ? (
-            Array.from({ length: 3 }).map((_, i) => <MediaCardSkeleton key={i} />)
-          ) : errorMedia ? (
-            <p className="col-span-3 py-8 font-mono text-sm text-vermilion">
-              Something went wrong loading media.
-            </p>
-          ) : (
-            media?.map((m) => <MediaCard key={m.id} item={m} />)
-          )}
-        </div>
+        <ContentFeed
+          queryKey={["media"]}
+          queryFn={fetchMedia}
+          renderItem={(m) => <MediaCard key={m.id} item={m} />}
+          Skeleton={MediaCardSkeleton}
+          skeletonCount={3}
+          layout="grid"
+          errorLabel="Something went wrong loading media."
+          limit={3}
+          className="mt-8"
+        />
       </Reveal>
     </div>
   );

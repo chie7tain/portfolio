@@ -26,6 +26,8 @@ yarn test:watch   # vitest watch
 - **`src/App.tsx`** — router root with public/admin shell split
 - **`src/api/index.ts`** — all fetch calls; handles 401 redirect to `/admin/login`
 - **`src/components/admin/RouteGuard.tsx`** — checks `sessionStorage` for API key
+- **`src/components/admin/AdminResourcePage.tsx`** + **`useAdminResource.ts`** — the **Admin resource** module: table + form chrome + the CRUD state machine. The three admin pages are thin configs over it.
+- **`src/components/ContentFeed.tsx`** — a **Content Feed**: fetches one content type and owns the loading-skeleton / error / empty / list tri-state. Every public feed Page and each HomePage section renders one.
 - **`@shared`** alias → `./shared/` (types shared with backend)
 - **`tests/handlers.ts`** — MSW mock handlers and fixture data used across all tests
 

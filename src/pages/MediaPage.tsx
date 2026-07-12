@@ -1,14 +1,9 @@
-import { useQuery } from '@tanstack/react-query'
+import ContentFeed from '../components/ContentFeed'
 import { fetchMedia } from '../api'
 import MediaCard from '../components/MediaCard'
 import MediaCardSkeleton from '../components/MediaCardSkeleton'
 
 export default function MediaPage() {
-  const { data: media, isLoading, isError } = useQuery({
-    queryKey: ['media'],
-    queryFn: fetchMedia,
-  })
-
   return (
     <div className="max-w-6xl mx-auto px-6 pt-14 pb-24 relative z-10">
       <header className="border-b-2 border-ink pb-8 mb-10">
@@ -24,22 +19,16 @@ export default function MediaPage() {
         </p>
       </header>
 
-      {isError && (
-        <p className="py-8 font-mono text-sm text-vermilion">
-          Something went wrong loading media.
-        </p>
-      )}
-      {!isLoading && !isError && media?.length === 0 && (
-        <p className="py-8 font-mono text-sm text-faded uppercase tracking-wider">
-          No media yet.
-        </p>
-      )}
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {isLoading
-          ? Array.from({ length: 3 }).map((_, i) => <MediaCardSkeleton key={i} />)
-          : media?.map((m) => <MediaCard key={m.id} item={m} />)}
-      </div>
+      <ContentFeed
+        queryKey={['media']}
+        queryFn={fetchMedia}
+        renderItem={(m) => <MediaCard key={m.id} item={m} />}
+        Skeleton={MediaCardSkeleton}
+        skeletonCount={3}
+        layout="grid"
+        errorLabel="Something went wrong loading media."
+        emptyLabel="No media yet."
+      />
     </div>
   )
 }

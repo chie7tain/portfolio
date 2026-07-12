@@ -24,7 +24,10 @@ export default function Footer() {
           <br />
           something
           <span className="text-vermilion group-hover:not-italic italic transition-all"> good.</span>
-          <span className="inline-block ml-4 align-middle text-vermilion transition-transform duration-300 group-hover:translate-x-2">
+          <span
+            aria-hidden="true"
+            className="inline-block ml-4 align-middle text-vermilion transition-transform duration-300 group-hover:translate-x-2"
+          >
             →
           </span>
         </Link>
