@@ -1,14 +1,20 @@
 import { render, screen, waitFor } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { http, HttpResponse } from 'msw'
 import { server } from '../handlers'
 import ArticlesPage from '../../src/pages/ArticlesPage'
 
 function renderPage() {
+  const queryClient = new QueryClient({
+    defaultOptions: { queries: { retry: false } },
+  })
   return render(
-    <MemoryRouter>
-      <ArticlesPage />
-    </MemoryRouter>,
+    <QueryClientProvider client={queryClient}>
+      <MemoryRouter>
+        <ArticlesPage />
+      </MemoryRouter>
+    </QueryClientProvider>,
   )
 }
 
