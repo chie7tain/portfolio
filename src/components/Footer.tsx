@@ -1,12 +1,24 @@
-import { Link } from 'react-router-dom'
-import { FaGithub, FaLinkedin } from 'react-icons/fa'
-import { FaXTwitter } from 'react-icons/fa6'
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 const socials = [
-  { label: 'GitHub', href: 'https://github.com/chie7tain', Icon: FaGithub },
-  { label: 'LinkedIn', href: 'https://linkedin.com/in/ifeanyi-okwuobi', Icon: FaLinkedin },
-  { label: 'Twitter', href: 'https://twitter.com/chie7tain', Icon: FaXTwitter },
-]
+  {
+    label: "GitHub profile",
+    href: "https://github.com/chie7tain",
+    Icon: FaGithub,
+  },
+  {
+    label: "LinkedIn profile",
+    href: "https://www.linkedin.com/in/fredricksylvester",
+    Icon: FaLinkedin,
+  },
+  {
+    label: "Twitter profile",
+    href: "https://x.com/ol7mpian",
+    Icon: FaXTwitter,
+  },
+];
 
 export default function Footer() {
   return (
@@ -23,7 +35,10 @@ export default function Footer() {
           Let’s build
           <br />
           something
-          <span className="text-vermilion group-hover:not-italic italic transition-all"> good.</span>
+          <span className="text-vermilion group-hover:not-italic italic transition-all">
+            {" "}
+            good.
+          </span>
           <span
             aria-hidden="true"
             className="inline-block ml-4 align-middle text-vermilion transition-transform duration-300 group-hover:translate-x-2"
@@ -43,10 +58,10 @@ export default function Footer() {
           </p>
 
           <a
-            href="mailto:fredrickokwuobi@gmail.com"
+            href="mailto:fredrickangel.work@gmail.com"
             className="font-mono text-[0.7rem] uppercase tracking-[0.15em] text-ink hover:text-vermilion transition-colors md:text-center"
           >
-            fredrickokwuobi@gmail.com
+            fredrickangel.work@gmail.com
           </a>
 
           <div className="flex items-center gap-5 md:justify-end">
@@ -73,5 +88,5 @@ export default function Footer() {
         </p>
       </div>
     </footer>
-  )
+  );
 }
