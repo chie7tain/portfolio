@@ -1,14 +1,14 @@
-import { Link } from "react-router-dom";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import ContentFeed from "../components/ContentFeed";
-import { fetchProjects, fetchArticles, fetchMedia } from "../api";
-import ProjectCard from "../components/ProjectCard";
+import { Link } from "react-router-dom";
+import { fetchArticles, fetchMedia, fetchProjects } from "../api";
 import ArticleCard from "../components/ArticleCard";
-import MediaCard from "../components/MediaCard";
-import ProjectCardSkeleton from "../components/ProjectCardSkeleton";
 import ArticleCardSkeleton from "../components/ArticleCardSkeleton";
+import ContentFeed from "../components/ContentFeed";
+import MediaCard from "../components/MediaCard";
 import MediaCardSkeleton from "../components/MediaCardSkeleton";
+import ProjectCard from "../components/ProjectCard";
+import ProjectCardSkeleton from "../components/ProjectCardSkeleton";
 import Reveal from "../components/Reveal";
 
 const techStack = ["Node.js", "React", "TypeScript", "PostgreSQL", "Docker"];
@@ -23,13 +23,21 @@ const skills = [
 ];
 
 const heroSocials = [
-  { label: "GitHub profile", href: "https://github.com/chie7tain", Icon: FaGithub },
+  {
+    label: "GitHub profile",
+    href: "https://github.com/chie7tain",
+    Icon: FaGithub,
+  },
   {
     label: "LinkedIn profile",
-    href: "https://linkedin.com/in/ifeanyi-okwuobi",
+    href: "https://www.linkedin.com/in/fredricksylvester",
     Icon: FaLinkedin,
   },
-  { label: "Twitter profile", href: "https://twitter.com/chie7tain", Icon: FaXTwitter },
+  {
+    label: "Twitter profile",
+    href: "https://x.com/ol7mpian",
+    Icon: FaXTwitter,
+  },
 ];
 
 /** Section masthead — kicker number + title, with an index link on the right. */
@@ -90,7 +98,7 @@ export default function HomePage() {
           style={{ animationDelay: "80ms" }}
         >
           <span className="font-display text-lg font-medium text-ink">
-            Ifeanyi Okwuobi
+            Ifeanyi Fredrick Okwuobi
           </span>
           <span aria-hidden="true" className="text-hairline">
             /
@@ -117,8 +125,8 @@ export default function HomePage() {
         >
           A full-stack software engineer building{" "}
           <span className="text-ink font-medium">scalable, data-driven</span>{" "}
-          applications and web platforms — from database schema to real-time
-          event pipelines.
+          applications and web platforms from database schema to real-time event
+          pipelines.
         </p>
 
         {/* Tech + socials */}
@@ -136,7 +144,10 @@ export default function HomePage() {
               </li>
             ))}
           </ul>
-          <span className="hidden sm:block w-px h-5 bg-hairline" aria-hidden="true" />
+          <span
+            className="hidden sm:block w-px h-5 bg-hairline"
+            aria-hidden="true"
+          />
           <div className="flex items-center gap-5">
             {heroSocials.map(({ label, href, Icon }) => (
               <a
@@ -161,11 +172,18 @@ export default function HomePage() {
         </span>
         <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-10 md:gap-16 items-start mt-6">
           <p className="dropcap font-display text-xl md:text-2xl leading-relaxed text-ink-soft">
-            I&apos;m a full-stack engineer focused on backend systems, APIs, and
+            I&apos;m a full-stack engineer who builds APIs, event-driven
+            systems, and developer tooling. I've shipped production software
+            across fintech, SaaS, and media from database schema design to
+            real-time trade-processing pipelines most recently on regulated
+            capital-markets infrastructure where correctness isn't optional. I
+            care about clean architecture and code that doesn't need a legend to
+            read
+            {/* I&apos;m a full-stack engineer focused on backend systems, APIs, and
             developer tooling. I&apos;ve shipped production software across
-            fintech, SaaS, and media — from database schema design to real-time
+            fintech, SaaS, and media from database schema design to real-time
             event pipelines. I care about clean architecture and code that
-            doesn&apos;t need a legend to read.
+            doesn&apos;t need a legend to read. */}
           </p>
           <ul className="border-t border-hairline">
             {skills.map((skill, i) => (
@@ -195,7 +213,9 @@ export default function HomePage() {
         <ContentFeed
           queryKey={["projects"]}
           queryFn={fetchProjects}
-          renderItem={(p, i) => <ProjectCard key={p.id} project={p} index={i} />}
+          renderItem={(p, i) => (
+            <ProjectCard key={p.id} project={p} index={i} />
+          )}
           Skeleton={ProjectCardSkeleton}
           skeletonCount={3}
           layout="stack"
